@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about - mathewd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --h1-size: 20px;
+            --h1-weight: 700;
+            --h2-size: 16px;
+            --h2-weight: 700;
+            --b1-size: 16px;
+            --b1-weight: 400;
+            --color-text: #121212;
+            --color-line: #AAAAAA;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: left;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Typography Styles */
+        .h1 {
+            font-size: var(--h1-size);
+            font-weight: var(--h1-weight);
+            line-height: 1;
+            text-align: left;
+        }
+
+        .h2 {
+            font-size: var(--h2-size);
+            font-weight: var(--h2-weight);
+            line-height: 1;
+            text-align: left;
+        }
+
+        .b1 {
+            font-size: var(--b1-size);
+            font-weight: var(--b1-weight);
+            line-height: 1;
+            text-align: left;
+        }
+
+        /* Layout Container */
+        .page-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Left Column */
+        .left-col {
+            width: fit-content;
+            margin-left: 30px;
+            padding-right: 40px;
+        }
+
+        .bottom-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Right Column */
+        .right-col {
+            flex-grow: 1;
+            padding-right: 30px;
+        }
+
+        /* About text paragraphs */
+        .about-body p {
+            margin-bottom: 24px;
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+
+        .about-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-body a {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Photo above text layout */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .about-photo {
+            width: 220px;
+            margin-bottom: 24px;
+        }
+
+        .about-photo img {
+            width: 100%;
+            display: block;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            header {
+                padding-left: 20px;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-col {
+                width: 100%;
+                max-width: 100%;
+                min-width: unset;
+                margin-left: 20px;
+                padding-right: 20px;
+                margin-bottom: 28px;
+            }
+
+            .sticky-nav {
+                position: static !important;
+            }
+
+            .right-col {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .about-photo {
+                width: 180px;
+            }
+
+            .about-body p {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+        <header>
+            <a href="index.html" class="h1">mathewd</a>
+        </header>
+
+        <div class="main-container">
+            <!-- Left Column -->
+            <div class="left-col b1">
+                <div class="sticky-nav" style="position: sticky; top: 20px;">
+                    <div class="bottom-links">
+                        <a href="index.html">projects</a>
+                        <a href="writing.html">writing</a>
+                        <a href="archive.html">archive</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col b1">
+                <div class="about-content">
+                    <!-- Photo -->
+                    <div class="about-photo">
+                        <img src="./photo.webp" alt="mathew">
+                    </div>
+                    <!-- Text -->
+                    <div class="about-body">
+                        <p>I am an observer. looking closely at things with all the senses, led by the eye, I want to
+                            pierce
+                            the surface of the objective world. that's when I shift to the minds eye, while still
+                            observing
+                            the physicalities of the world around me.</p>
+
+                        <p>I set out into the world, armed with these powers of observation. I harvest fragments of
+                            leaves,
+                            the intricacies of decay written on them. broken wings of butterflies. a young glow worm. I
+                            etch
+                            the swirls of the sky into my camera.</p>
+
+                        <p>like lao tzu I want to watch the river flow and mud settle, but I also want to bring back the
+                            river and mud to the studio to create my own processes of settlement. I will bring them in
+                            beakers. out of their original context, they will be strengthened with poetic devices of
+                            thought
+                            and text.</p>
+
+                        <p>the natural world is disappearing from our living spaces. how do we learn to respect the
+                            traces
+                            left by insects in the air? how can we learn to follow the pace of true conscience, which is
+                            also the pace of nature, amidst the busy chase for trains and dates? these are some
+                            questions
+                            that guide my practice.</p>
+
+                        <p>watch <a href="https://youtu.be/uZkmX760F5k?si=71f6Bi4Ge1W0YfHI" target="_blank"
+                                rel="noopener">this</a> video I created for labocine, speaking about my work and process
+                        </p>
+
+                        <p>read my poetry at <a href="https://bombaylitmag.com/contribution/mathew-dominic-issue-56/"
+                                target="_blank" rel="noopener">bombay literary magazine</a> and <a
+                                href="http://www.vayavya.in/mathew-dominic-monsoon.html" target="_blank"
+                                rel="noopener">vayavya</a></p>
+
+                        <p>my email is <a href="mailto:mathew.d6@protonmail.com">mathew.d6@protonmail.com</a></p>
+
+                        <p>find me on instagram: <a href="https://instagram.com/mattthai" target="_blank"
+                                rel="noopener">mattthai</a></p>
+
+                        <p>leave me a public message <a href="https://www.yourworldoftext.com/mathewd" target="_blank"
+                                rel="noopener">here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
