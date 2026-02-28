@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mathewd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --h1-size: 20px;
+            --h1-weight: 700;
+            --h2-size: 16px;
+            --h2-weight: 700;
+            --b1-size: 16px;
+            --b1-weight: 400;
+            --color-text: #121212;
+            --color-line: #AAAAAA;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Typography Styles */
+        .h1 {
+            font-size: var(--h1-size);
+            font-weight: var(--h1-weight);
+            line-height: 1;
+        }
+
+        .h2 {
+            font-size: var(--h2-size);
+            font-weight: var(--h2-weight);
+            line-height: 1;
+        }
+
+        .b1 {
+            font-size: var(--b1-size);
+            font-weight: var(--b1-weight);
+            line-height: 1;
+        }
+
+        /* Layout Container */
+        .page-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
+
+        /* Layout Container */
+        .main-container {
+            display: flex;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Left Column */
+        .left-col {
+            width: 30%;
+            max-width: 30%;
+            min-width: 250px;
+            margin-left: 30px;
+            padding-right: 20px;
+        }
+
+        .left-col p {
+            margin-bottom: 24px;
+        }
+
+        .projects-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .projects-list li {
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: font-weight 0.2s;
+        }
+
+        .bottom-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Right Column */
+        .right-col {
+            flex-grow: 1;
+            padding-right: 30px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-separator {
+            width: 80%;
+            height: 1px;
+            background-color: var(--color-line);
+            border: none;
+            margin: 25px 0 20px 0;
+        }
+
+        /* Mobile-only section titles (hidden on desktop) */
+        .section-mobile-title {
+            display: none;
+            margin-bottom: 12px;
+        }
+
+        /* Slideshow Styles */
+        .slideshow {
+            width: 80%;
+            position: relative;
+            aspect-ratio: 4 / 3;
+            background: #f9f9f9;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        /* Single-image slideshows: no pointer cursor */
+        .slideshow.single-image {
+            cursor: default;
+        }
+
+        .slideshow img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 10px;
+            pointer-events: none;
+        }
+
+        .slideshow-controls button {
+            pointer-events: auto;
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .slideshow:hover .slideshow-controls button {
+            opacity: 1;
+        }
+
+        /* Paragraph styles */
+        .text-content {
+            margin-top: 24px;
+            max-width: 50ch;
+            margin-bottom: 24px;
+        }
+
+        /* Embedded Video Styles */
+        .video-container {
+            width: 80%;
+            position: relative;
+            padding-bottom: 45%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            header {
+                padding-left: 20px;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-col {
+                width: 100%;
+                max-width: 100%;
+                min-width: unset;
+                margin-left: 20px;
+                padding-right: 20px;
+                margin-bottom: 28px;
+            }
+
+            /* Disable sticky nav on mobile so it doesn't overlap content */
+            .sticky-nav {
+                position: static !important;
+            }
+
+            .right-col {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .slideshow {
+                width: 100%;
+            }
+
+            .video-container {
+                width: 100%;
+                padding-bottom: 56.25%;
+                /* true 16:9 at full width */
+            }
+
+            .section-separator {
+                width: 100%;
+            }
+
+            .text-content {
+                max-width: 100%;
+            }
+
+            .section-mobile-title {
+                display: block;
+            }
+
+            /* All nav links stay B1 on mobile — no active bold state needed */
+            .project-link {
+                font-size: var(--b1-size);
+                font-weight: var(--b1-weight);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+        <header>
+            <a href="#" class="h1">mathewd</a>
+        </header>
+
+        <div class="main-container">
+            <!-- Left Column -->
+            <div class="left-col b1">
+                <div class="intro-text">
+                    <p>mathew is an artist and filmmaker based in south India. <a href="about.html">more &gt;</a></p>
+                    <p>select projects below</p>
+                </div>
+
+                <div class="sticky-nav" style="position: sticky; top: 20px;">
+                    <ul class="projects-list">
+                        <li id="link-circular" class="project-link h2" data-target="section-circular">1 circular</li>
+                        <li id="link-leavinglilypond" class="project-link b1" data-target="section-leavinglilypond">2
+                            leaving lilypond</li>
+                        <li id="link-negative" class="project-link b1" data-target="section-negative">3 negative</li>
+                        <li id="link-before" class="project-link b1" data-target="section-before">4 before my beginning
+                        </li>
+                        <li id="link-dreams" class="project-link b1" data-target="section-dreams">5 dreams of the
+                            rhacophorus</li>
+                        <li id="link-millipede" class="project-link b1" data-target="section-millipede">6 millipede
+                        </li>
+                        <li id="link-topollen" class="project-link b1" data-target="section-topollen">7 to pollen to
+                            gadfly</li>
+                    </ul>
+
+                    <div class="bottom-links">
+                        <a href="writing.html">writing</a>
+                        <a href="archive.html">archive</a>
+                        <a href="news.html">news</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col b1">
+
+                <!-- Section 1 : circular (6 images) -->
+                <div id="section-circular" class="section">
+                    <p class="h2 section-mobile-title">circular</p>
+                    <div class="slideshow" id="slideshow-circular" onclick="changeSlide('slideshow-circular', 1)">
+                        <img src="../1 circular/formatted/circular_1.webp" class="active" alt="Circular 1">
+                        <img src="../1 circular/formatted/circular_2.webp" alt="Circular 2">
+                        <img src="../1 circular/formatted/circular_3.webp" alt="Circular 3">
+                        <img src="../1 circular/formatted/circular_4.webp" alt="Circular 4">
+                        <img src="../1 circular/formatted/circular_5.webp" alt="Circular 5">
+                        <img src="../1 circular/formatted/circular_6.webp" alt="Circular 6">
+                        <div class="slideshow-controls">
+                            <button
+                                onclick="changeSlide('slideshow-circular', -1); event.stopPropagation();">&#10094;</button>
+                            <button
+                                onclick="changeSlide('slideshow-circular', 1); event.stopPropagation();">&#10095;</button>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/flyTPIdKNrg?start=4"
+                            title="YouTube video - Circular" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+                <!-- Section 2 : leaving lilypond (7 images) -->
+                <div id="section-leavinglilypond" class="section">
+                    <p class="h2 section-mobile-title">leaving lilypond</p>
+                    <div class="slideshow" id="slideshow-leavinglilypond"
+                        onclick="changeSlide('slideshow-leavinglilypond', 1)">
+                        <img src="../2 leavinglilypond/formatted/leaving_0.webp" class="active"
+                            alt="Leaving Lilypond 0">
+                        <img src="../2 leavinglilypond/formatted/leaving_1.webp" alt="Leaving Lilypond 1">
+                        <img src="../2 leavinglilypond/formatted/leaving_2.webp" alt="Leaving Lilypond 2">
+                        <img src="../2 leavinglilypond/formatted/leaving_3.webp" alt="Leaving Lilypond 3">
+                        <img src="../2 leavinglilypond/formatted/leaving_4.webp" alt="Leaving Lilypond 4">
+                        <img src="../2 leavinglilypond/formatted/leaving_5.webp" alt="Leaving Lilypond 5">
+                        <img src="../2 leavinglilypond/formatted/leaving_6.webp" alt="Leaving Lilypond 6">
+                        <div class="slideshow-controls">
+                            <button
+                                onclick="changeSlide('slideshow-leavinglilypond', -1); event.stopPropagation();">&#10094;</button>
+                            <button
+                                onclick="changeSlide('slideshow-leavinglilypond', 1); event.stopPropagation();">&#10095;</button>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/-6hvTDVzyFo"
+                            title="YouTube video - Leaving Lilypond" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+                <!-- Section 3 : negative (9 images) -->
+                <div id="section-negative" class="section">
+                    <p class="h2 section-mobile-title">negative</p>
+                    <div class="slideshow" id="slideshow-negative" onclick="changeSlide('slideshow-negative', 1)">
+                        <img src="../3 negative/formatted/negative_1.webp" class="active" alt="Negative 1">
+                        <img src="../3 negative/formatted/negative_2.webp" alt="Negative 2">
+                        <img src="../3 negative/formatted/negative_3.webp" alt="Negative 3">
+                        <img src="../3 negative/formatted/negative_4.webp" alt="Negative 4">
+                        <img src="../3 negative/formatted/negative_5.webp" alt="Negative 5">
+                        <img src="../3 negative/formatted/negative_6.webp" alt="Negative 6">
+                        <img src="../3 negative/formatted/negative_7.webp" alt="Negative 7">
+                        <img src="../3 negative/formatted/negative_8.webp" alt="Negative 8">
+                        <img src="../3 negative/formatted/negative_9.webp" alt="Negative 9">
+                        <div class="slideshow-controls">
+                            <button
+                                onclick="changeSlide('slideshow-negative', -1); event.stopPropagation();">&#10094;</button>
+                            <button
+                                onclick="changeSlide('slideshow-negative', 1); event.stopPropagation();">&#10095;</button>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/jI5K4VAhZXg"
+                            title="YouTube video - Negative" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+                <!-- Section 4 : before my beginning (1 image - no arrows) -->
+                <div id="section-before" class="section">
+                    <p class="h2 section-mobile-title">before my beginning</p>
+                    <div class="slideshow single-image" id="slideshow-before">
+                        <img src="../4 before my beginning/formatted/before_2.webp" class="active"
+                            alt="Before My Beginning">
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/VfR6DrcR6pg"
+                            title="YouTube video - Before My Beginning" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+                <!-- Section 5 : dreams of the rhacophorus (1 image - no arrows) -->
+                <div id="section-dreams" class="section">
+                    <p class="h2 section-mobile-title">dreams of the rhacophorus</p>
+                    <div class="slideshow single-image" id="slideshow-dreams">
+                        <img src="../5 dreams of the rhacophorus/5_dreamsoftherhacophorus.webp" class="active"
+                            alt="Dreams of the Rhacophorus">
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/VfR6DrcR6pg" title="YouTube video - Dreams"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+                <!-- Section 6 : millipede (3 images) -->
+                <div id="section-millipede" class="section">
+                    <p class="h2 section-mobile-title">millipede</p>
+                    <div class="slideshow" id="slideshow-millipede" onclick="changeSlide('slideshow-millipede', 1)">
+                        <img src="../6 milipede/milipede1.webp" class="active" alt="Millipede 1">
+                        <img src="../6 milipede/milipede2.webp" alt="Millipede 2">
+                        <img src="../6 milipede/milipede3.webp" alt="Millipede 3">
+                        <div class="slideshow-controls">
+                            <button
+                                onclick="changeSlide('slideshow-millipede', -1); event.stopPropagation();">&#10094;</button>
+                            <button
+                                onclick="changeSlide('slideshow-millipede', 1); event.stopPropagation();">&#10095;</button>
+                        </div>
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <!-- Replace src with actual youtube link when available -->
+                        <iframe src="https://www.youtube-nocookie.com/embed/flyTPIdKNrg?start=4"
+                            title="YouTube video - Millipede" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+                <!-- Section 7 : to pollen to gadfly (1 image - no arrows) -->
+                <div id="section-topollen" class="section">
+                    <p class="h2 section-mobile-title">to pollen to gadfly</p>
+                    <div class="slideshow single-image" id="slideshow-topollen">
+                        <img src="../7 to pollen to gadfly/formatted/8_topollentogadfly.webp" class="active"
+                            alt="To Pollen to Gadfly">
+                    </div>
+
+                    <div class="text-content">
+                        Lorem Epsom is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube-nocookie.com/embed/FxaB6--5vmI"
+                            title="YouTube video - To Pollen" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen referrerpolicy="no-referrer"></iframe>
+                    </div>
+
+                    <hr class="section-separator">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Track reset timers per slideshow
+        const resetTimers = {};
+
+        function changeSlide(slideshowId, step) {
+            const slideshow = document.getElementById(slideshowId);
+            const images = slideshow.querySelectorAll('img');
+            let activeIndex = 0;
+
+            // Find current active index
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].classList.contains('active')) {
+                    activeIndex = i;
+                    break;
+                }
+            }
+
+            let newIndex = activeIndex + step;
+            if (newIndex >= images.length) newIndex = 0;
+            if (newIndex < 0) newIndex = images.length - 1;
+
+            // Crossfade: remove active from old, add to new
+            images[activeIndex].classList.remove('active');
+            images[newIndex].classList.add('active');
+
+            // Reset the auto-revert timer whenever slide changes
+            scheduleReset(slideshowId);
+        }
+
+        function resetToFirst(slideshowId) {
+            const slideshow = document.getElementById(slideshowId);
+            if (!slideshow) return;
+            const images = slideshow.querySelectorAll('img');
+            // Remove active from all, add to first — CSS transition handles the fade
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === 0);
+            });
+        }
+
+        function scheduleReset(slideshowId) {
+            // Clear any existing timer for this slideshow
+            if (resetTimers[slideshowId]) {
+                clearTimeout(resetTimers[slideshowId]);
+            }
+            // Set a new 10-second timer to revert to first image
+            resetTimers[slideshowId] = setTimeout(() => {
+                resetToFirst(slideshowId);
+            }, 10000);
+        }
+
+        // Initialise reset timers for all multi-image slideshows on load
+        document.querySelectorAll('.slideshow:not(.single-image)').forEach(slideshow => {
+            scheduleReset(slideshow.id);
+        });
+
+        // --- Navigation link active-state logic ---
+        const projectLinks = document.querySelectorAll('.project-link');
+
+        function setActiveLink(targetId) {
+            projectLinks.forEach(item => {
+                if (item.getAttribute('data-target') === targetId) {
+                    item.classList.remove('b1');
+                    item.classList.add('h2');
+                } else {
+                    item.classList.remove('h2');
+                    item.classList.add('b1');
+                }
+            });
+        }
+
+        projectLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                if (targetId) {
+                    setActiveLink(targetId);
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Intersection Observer for scroll tracking
+        const sections = document.querySelectorAll('.section');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveLink(entry.target.id);
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.3 });
+
+        sections.forEach(section => sectionObserver.observe(section));
+    </script>
+</body>
+
+</html>
