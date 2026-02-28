@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>writing - mathewd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --h1-size: 20px;
+            --h1-weight: 700;
+            --h2-size: 16px;
+            --h2-weight: 700;
+            --b1-size: 16px;
+            --b1-weight: 400;
+            --color-text: #121212;
+            --color-line: #AAAAAA;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: left;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Typography Styles */
+        .h1 {
+            font-size: var(--h1-size);
+            font-weight: var(--h1-weight);
+            line-height: 1;
+            text-align: left;
+        }
+
+        .h2 {
+            font-size: var(--h2-size);
+            font-weight: var(--h2-weight);
+            line-height: 1;
+            text-align: left;
+        }
+
+        .b1 {
+            font-size: var(--b1-size);
+            font-weight: var(--b1-weight);
+            line-height: 1;
+            text-align: left;
+        }
+
+        /* Layout Container */
+        .page-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
+
+        /* Layout Container */
+        .main-container {
+            display: flex;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Left Column */
+        .left-col {
+            width: fit-content;
+            margin-left: 30px;
+            padding-right: 40px;
+        }
+
+        .left-col p {
+            margin-bottom: 24px;
+        }
+
+        .bottom-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Right Column */
+        .right-col {
+            flex-grow: 1;
+            /* Automatically resizes dependent on left col */
+            padding-right: 30px;
+        }
+
+        /* Entry Styles */
+        .entry {
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .entry-date {
+            margin-top: 8px;
+            margin-bottom: 16px;
+            /* One line break (~1 x 16px) */
+        }
+
+        .entry-body {
+            width: 80%;
+            white-space: pre-wrap;
+            margin-bottom: 32px;
+            /* Two line breaks */
+            text-align: left;
+        }
+
+        .poem-section-title {
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .section-separator {
+            width: 80%;
+            height: 1px;
+            background-color: var(--color-line);
+            border: none;
+            margin: 25px 0 20px 0;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            header {
+                padding-left: 20px;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-col {
+                width: 100%;
+                max-width: 100%;
+                min-width: unset;
+                margin-left: 20px;
+                padding-right: 20px;
+                margin-bottom: 28px;
+            }
+
+            .sticky-nav {
+                position: static !important;
+            }
+
+            .right-col {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .entry-body {
+                width: 100%;
+            }
+
+            .section-separator {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+        <header>
+            <a href="index.html" class="h1">mathewd</a>
+        </header>
+
+        <div class="main-container">
+            <!-- Left Column -->
+            <div class="left-col b1">
+                <div class="sticky-nav" style="position: sticky; top: 20px;">
+                    <div class="bottom-links">
+                        <a href="index.html">projects</a>
+                        <a href="writing.html" class="h2">writing</a>
+                        <a href="archive.html">archive</a>
+                        <a href="news.html">news</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col b1">
+
+                <article class="entry">
+                    <h2 class="h2">Three poems about day boy</h2>
+                    <p class="entry-date b1">Friday, 27 February ’26</p>
+
+                    <div class="entry-body b1">
+                        <h2 class="h2 poem-section-title">day boy 1: At the river</h2>
+                        at the break of dawn off to the temple to seek the blessings of day boy
+                        flowers in his hair a bandana sprouting chrysanthemums
+                        eyelashes dripping holy ashes
+                        taming the sun He
+                        burning the waters
+
+                        I witnessed the solar eclipse and I ejaculated
+                        the hot white gleam descended and settled on the river bed
+                        I jumped in
+                        o but it was night
+                        I wish I could be like you ladderless rudderless
+
+                        day boy I admire your vine-swinging attitude
+                        I know you drinking sun with bamboo straws
+                        I’ve watched you roll, cataclysmic
+                        upto a new thing everyday
+
+
+                        <h2 class="h2 poem-section-title">day boy 2: Composition</h2>
+
+                        people are made of dots. so are
+                        chairs things trees, light even
+                        is made of many dots.
+
+                        day boy is one
+                        dot.
+
+                        thats why anything can become He
+                        can become anything but for m
+                        he is day boy.
+
+                        concepts that are familiar such as
+
+                        voices mean people
+                        birds are the morning
+                        an eye means a person
+
+                        do not matter to day boy.
+                        in the west he sees the sun
+                        and decides now is the time for dreaming
+                        and enters the cosy cove of a fish’s mouth
+                        the fish swims the world.
+
+                        who loves ideas ideas are his art.
+                        who thinks of food and is hungry no more.
+                        who can see the wind blow in a clear night sky.
+                        who shakes stardust off his shoulders.
+                        who does the day.
+
+                        last I saw him
+                        he was at the cemetery
+                        correcting punctuation
+                        on the tombstones.
+
+
+                        <h2 class="h2 poem-section-title">day boy 3: Why the rain</h2>
+
+                        mystical day boy.
+                        climbing up a ladder to the Sun.
+                        pop the top to drink the brilliant orange juice.
+                        day boy drinks so much Sun he becomes the Sun. but now he wants to fall and he is too hot so he
+                        becomes Girl and rains.
+
+                        Girl falls to the water she is water.
+                        Girl loves fish so she becomes fish.
+                        in Girl’s mouth is a ring she refused to swallow as a child.
+                        Girl exchanges the ring with a fisherman for a compass that points to the desert.
+
+                        In the desert all there is is sand. but it is not sand that Girl is looking for. she is looking
+                        for monk Toad. why is she looking for monk Toad? monk Toad will answer her most
+                        burning question Why the rain.
+
+                        but she must find monk Toad before the hot hot desert Sun, the desert Sun where there
+                        are no hawks in the sky.
+
+                        but monk Toad is secretly in love with Girl. he knows that if he tells her Why the rain
+                        she will leave him forever. so he thinks her into an ice block made of diamonds so shiny
+                        shinier than the Sun can penetrate. Girl, happy in whatever form is happy this way but
+                        she still wants to know Why the rain.
+
+                        Girl hatches an egg made of water droplets and gifts it to monk Toad so he will tell her
+                        the answer. monk Toad drinks the egg in one enormous slurp and there is no more
+                        water to be found anywhere. then he realises his mistake If there is no water how can
+                        there be the Sun? with no Sun where the desert?
+
+                        the world the whole world slips into an in-between the shape of a peach pit, hard and
+                        dormant. monk Toad has no place to go so he goes nowhere. Girl is left alone and now
+                        has all the time in the world all to herself so she closes her eyes to nap think and finds
+                        herself in the ocean.
+
+                        Girl remembers falling from way above. remembers her home in the cotton tree.
+                        Grandmother used to make her pillows. When Grandmother died they wrapped her up
+                        in her own pillows and set her in orbit.
+
+                        Girl wonders where Grandmother is? If Grandmother will tell her Why the rain?
+
+                        tired of thinking Girl falls asleep and melts into diamond droplets. When Girl wakes up
+                        she sees a bright light day boy stands before her. he says It’s been a long time lets go,
+                        and they both go away.
+                    </div>
+
+                    <hr class="section-separator">
+                </article>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
